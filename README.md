@@ -19,7 +19,7 @@ Clonez le git, lancez le programme :+1:
 ### Le format des votes
 
 Une fois récupérez sur Bélénios, les votes sont récupérés sous cette forme :
-```json
+```
 [[note * nombre de candidat] * nombre de votes]
 ```
 Vous pouvez trouvez un exemple avec le fichier [resultats-test.json](./resultats-test.json)
