@@ -14,43 +14,47 @@ Le vote se fait par la méthode du vote majoritaire, et le départage des égali
 
 Clonez le git, lancez le programme :+1:
 
-## Utiliser l'application
+## Explications
 
 ### Le format des votes
 
 Une fois récupérez sur Bélénios, les votes sont récupérés sous cette forme :
 ```
-[[note * nombre de candidat] * nombre de votes]
+[[[note * nombre de candidat] * nombre de votes] * nombre de questions]
 ```
-Vous pouvez trouvez un exemple avec le fichier [resultats-test.json](./resultats-test.json)
+Vous pouvez trouvez un exemple avec le fichier [result.json](./result.json)
 
-<br />
+## Utiliser l'application
 
-Il faut avoir <b>5</b> fichiers `.json` au nom des postes que l'on peut paramètrer ici :
+A la fin de la page de dépouillage des votes de Bélénios, vous trouvez un bouton `raw results` qui permet de télécharger le fichier des résultats ([result.json](./result.json)) et il vous faudra le mettre dans le même dossier que le programme.
+
+Vous pouvez paramètrer la liste des rôles pour 
 ```python
 roles = ["Présidence", "Vice-Présidence", "Trésorerie", "Vice-Tésorerie", "Secrétariat"]
 ```
 
 <br />
 
-Les candidats à l'élection sont définis au début du fichier :
+De même, les candidats à l'élection sont définis au début du fichier, dans l'ordre des postes :
 ```python
 candidatss = [
     ["Answer 1", "Answer 2", "Answer 3"],
     ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"]
+    ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+    ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"],
+    ["Answer 1", "Answer 2"]
 ]
 ```
-
+### <u> /!\ ATTENTION /!\ </u>
+Les postes doivent être dans le même ordre que les questions posées sur Bélénios et le nom des candidats doit être le même que dans les questions sur Bélénios.
+### <u> /!\ ATTENTION /!\ </u>
 
 ### Les résultats
 
 Les résultats sont donnés sous trois formes
 
-- Un fichier [resume.txt](./resume.txt) qui est l'équivalent des `print` du terminal;
-- Un fichier [debug.txt](./debug.txt) qui est le même  que le fichier précédent, mais avec plus de précision sur certains points (notament la gestion des égalités entre médianes);
-- Un [graphique](./test.png) crée par le programme donnant les résultats avec les candidats classés et divers autres informations. Résultat avec les données de test :
+- Un fichier [resume.txt](./debug/resume.txt) qui est l'équivalent des `print` du terminal;
+- Un fichier [debug.txt](./debug//resume.txt) qui est le même  que le fichier précédent, mais avec plus de précision sur certains points (notament la gestion des égalités entre médianes);
+- Des [graphiques](./graphs/) crée par le programme donnant les résultats avec les candidats classés et divers autres informations. Résultat avec les données de test :
 
-![test.png](./test.png "Résultat des votes")
+![Vice-Trésorerie.png](./graphs/Vice-Trésorerie.png "Résultat des votes")

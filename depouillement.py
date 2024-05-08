@@ -1,69 +1,37 @@
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from math import *
 from copy import deepcopy
 
 ## ======================================== Variables ========================================
-roles = ["Présidence", "Vice-Présidence", "Trésorerie", "Vice-Tésorerie", "Secrétariat"]
+roles = ["Présidence", "Vice-Présidence", "Trésorerie", "Vice-Trésorerie", "Secrétariat"]
 candidatss = [ # La liste des candidats aux différents rôles
     ["Answer 1", "Answer 2", "Answer 3"],
     ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"]
+    ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+    ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"],
+    ["Answer 1", "Answer 2"]
 ]
 notes_label = ["Extrêmement Favorable", "Très Favorable", "Favorable", "Neutre", "Défavorable", "Très Défavorable", "Extrêmement Défavorable"]
 
-def lesDesSontJetes(role, candidats) :
-    fullPrint("======================================== " + role + " ========================================\n")
+''' /!\ ATTENTION /!\ 
+La liste des rôles doit être la même que celle des questions posées sur Bélénios.
+De même pour les candidats, qui doit être dans le même ordre que celle de Bélénios.
+'''
 
-    # Extraction des données
-    resultats, nb_vote, nb_blanc = extractData(role)
-    fullPrint("Résultats : " + str(resultats) + "\n"
-        + "Nombre de votes valides : " + str(nb_vote) + "; \n"
-        + "Nombre de votes blancs : " + str(nb_blanc) + "\n")
-    # Vérification de la cohérence des données
-    checkData(resultats) 
-
-    # Calcul des médianes des candidats
-    medianes = calculateMedianes(nb_vote, resultats)
-    fullPrint("Candidats : " + str(candidats) + "\n"
-              + "Médianes des candidats : " + str(medianes) + "\n")
-
-    # Trie les candidats en fonction de leur médiane
-    sortResults(candidats, resultats, medianes)
-    fullPrint("Liste pré-triées : \n" + 
-        "   - Candidats : " + str(candidats) + "\n"
-        "   - Médianes : " + str(medianes) + "\n"
-        "   - Résultats : " + str(resultats) + "\n")
-    
-    # Trie les candidats à égalité    
-    sortEqualities(nb_vote, candidats, resultats, medianes)
-    fullPrint("Liste triées : \n" + 
-        "   - Candidats : " + str(candidats) + "\n"
-        "   - Médianes : " + str(medianes) + "\n"
-        "   - Résultats : " + str(resultats) + "\n")
-    
-    # Affiche le graph
-    showGraph(role, candidats, resultats, medianes, nb_blanc, nb_vote)
-
-# Process data
-def extractData(role: str) -> list[list[int]]:
+## ======================================== Functions ========================================
+## Process data
+def extractData(data) -> list[list[int]]:
     ''' Cette fonction sert à extraire les données obtenues en json depuis Bélénios
     
-    Input :     role -> Rôle d'ont on veut extraire les données.
+    Input :     data -> Résultats de la question dont on veut extraire les données.
 
     Output :    resultats -> Liste du dépouillage de l'élection;
                 nb_vote (int) -> Nombre de votes valides;
                 nb_blanc (int) -> Nombre de votes blancs.'''
     global notes_label
-
-    # Ouvre le JSON
-    f = open('resultats-' + role +  '.json')
-
-    # Renvoie un object JSON en tant que dictionnaire
-    data = json.load(f)
 
     # Initialisation des résultats
     resultats = [[0 for candidat in data[0]] for note in notes_label]
@@ -270,7 +238,7 @@ def medianPointWithdraw(nb_vote: int, equality: list[int], mediane: int, resulta
             rank += len(subEquality)
             i += 1
 
-# Results modification
+## Results modification
 def saveResults(resultats: list[list[int]], i:int) -> list[int]:
     '''Sauvegarde les résultats d'index i'''
     return [resultats[note_index][i] for note_index in range(len(resultats))]
@@ -285,7 +253,7 @@ def setResults(resultats: list[list[int]], i: int, save_results: list[int]):
     for note_index in range(len(resultats)):
         resultats[note_index][i] = save_results[note_index]
 
-# Utilities
+## Utilities
 def areValuesEquals(liste: list):
     ''' Cette fonction sert savoir si une liste est composée d'une valeur unique
     
@@ -309,7 +277,7 @@ def fullPrint(texte: str):
     resume.write(texte + "\n")
     debug.write(texte + "\n")
 
-# Show graph
+## Show graph
 def showGraph(role: str, candidats: list[str], resultats: list[list[int]], medianes: list[int], nb_blanc: int, nb_vote: int):
     ''' Cette fonction permet de créer le graphique des résultats
     
@@ -384,19 +352,65 @@ def showGraph(role: str, candidats: list[str], resultats: list[list[int]], media
     # Ajoute les informations des votes blancs/valides
     plt.text(0, maxResult + 0.5, "Votes : " + str(nb_vote) + "\n" + "Votes blancs : " + str(nb_blanc), fontsize=10, ha='left', va='top', fontweight = 'bold')
 
-    plt.savefig(role + '.png', dpi=300, bbox_inches='tight') # Sauvegarde
+    graphForlder = 'graphs'
+    if not os.path.exists(os.path.join(os.path.dirname(__file__), graphForlder)):
+        os.makedirs(os.path.join(os.path.dirname(__file__), graphForlder))
+    plt.savefig(os.path.join(os.path.join(os.path.dirname(__file__), graphForlder), role + '.png'), dpi=300, bbox_inches='tight') # Sauvegarde
 
     #plt.subplots_adjust(bottom=0.125, top=0.95, left=0.05, right=0.95) # Ajuste la taille du graphique pour ne pas se supperposer à la légende
     plt.show()
 
 
-## Main
-resume = open("resume.txt", "w")
-debug = open("debug.txt", "w")
+## ======================================== Main ========================================
 
-lesDesSontJetes("test", candidatss[0])
-#for i in range(len(roles)):
-#    lesDesSontJetes(roles[i], candidatss[i])
+## Ouvre le JSON
+f = open(os.path.join(os.path.dirname(__file__), 'result.json'))
 
+## Ouvre les fichiers de debug
+
+debugFolder = 'debug'
+if not os.path.exists(os.path.join(os.path.dirname(__file__), debugFolder)):
+    os.makedirs(os.path.join(os.path.dirname(__file__), debugFolder))
+
+resume = open(os.path.join(os.path.join(os.path.dirname(__file__), debugFolder), 'resume.txt'), "w")
+debug = open(os.path.join(os.path.join(os.path.dirname(__file__), debugFolder), 'debug.txt'), "w")
+
+# Renvoie un object JSON en tant que dictionnaire
+datas = json.load(f)["result"]
+
+for i in range(0, len(roles)):
+    fullPrint("======================================== " + roles[i] + " ========================================\n")        
+
+    # Extraction des données
+    resultats, nb_vote, nb_blanc = extractData(datas[i])
+    fullPrint("Résultats : " + str(resultats) + "\n"
+        + "Nombre de votes valides : " + str(nb_vote) + "; \n"
+        + "Nombre de votes blancs : " + str(nb_blanc) + "\n")
+    # Vérification de la cohérence des données
+    checkData(resultats)
+
+    # Calcul des médianes des candidats
+    medianes = calculateMedianes(nb_vote, resultats)
+    fullPrint("Candidats : " + str(candidatss[i]) + "\n"
+              + "Médianes des candidats : " + str(medianes) + "\n")
+
+    # Trie les candidats en fonction de leur médiane
+    sortResults(candidatss[i], resultats, medianes)
+    fullPrint("Liste pré-triées : \n" + 
+        "   - Candidats : " + str(candidatss[i]) + "\n"
+        "   - Médianes : " + str(medianes) + "\n"
+        "   - Résultats : " + str(resultats) + "\n")
+    
+    # Trie les candidats à égalité    
+    sortEqualities(nb_vote, candidatss[i], resultats, medianes)
+    fullPrint("Liste triées : \n" + 
+        "   - Candidats : " + str(candidatss[i]) + "\n"
+        "   - Médianes : " + str(medianes) + "\n"
+        "   - Résultats : " + str(resultats) + "\n")
+    
+    # Affiche le graph
+    showGraph(roles[i], candidatss[i], resultats, medianes, nb_blanc, nb_vote)
+
+f.close()
 resume.close()
 debug.close()
