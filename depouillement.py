@@ -23,7 +23,7 @@ De même pour les candidats, qui doit être dans le même ordre que celle de Bé
 
 ## ======================================== Functions ========================================
 ## Process data
-def extractData(data) -> list[list[int]]:
+def extractData(data: list[list[int]]) -> list[list[int]]:
     ''' Cette fonction sert à extraire les données obtenues en json depuis Bélénios
     
     Input :     data -> Résultats de la question dont on veut extraire les données.
