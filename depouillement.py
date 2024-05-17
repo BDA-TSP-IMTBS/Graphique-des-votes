@@ -5,22 +5,6 @@ import os
 from math import *
 from copy import deepcopy
 
-## ======================================== Variables ========================================
-roles = ["Présidence", "Vice-Présidence", "Trésorerie", "Vice-Trésorerie", "Secrétariat"]
-candidatss = [ # La liste des candidats aux différents rôles
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-    ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"],
-    ["Answer 1", "Answer 2"]
-]
-notes_label = ["Extrêmement Favorable", "Très Favorable", "Favorable", "Neutre", "Défavorable", "Très Défavorable", "Extrêmement Défavorable"]
-
-''' /!\ ATTENTION /!\ 
-La liste des rôles doit être la même que celle des questions posées sur Bélénios.
-De même pour les candidats, qui doit être dans le même ordre que celle de Bélénios.
-'''
-
 ## ======================================== Functions ========================================
 ## Process data
 def extractData(data: list[list[int]]) -> list[list[int]]:
@@ -50,7 +34,6 @@ def extractData(data: list[list[int]]) -> list[list[int]]:
                 resultats[vote[candidat] - 1][candidat] += 1 # -1 car les résultats de Bélénios commencent à 1
 
     # Fermer le fichier
-    f.close()
 
     return resultats, nb_vote//len(resultats[0]), nb_blanc
 
@@ -364,7 +347,8 @@ def showGraph(role: str, candidats: list[str], resultats: list[list[int]], media
 ## ======================================== Main ========================================
 
 ## Ouvre le JSON
-f = open(os.path.join(os.path.dirname(__file__), 'result.json'))
+result = open(os.path.join(os.path.dirname(__file__), 'result.json'))
+config = open(os.path.join(os.path.dirname(__file__), 'config.json'))
 
 ## Ouvre les fichiers de debug
 
@@ -376,10 +360,18 @@ resume = open(os.path.join(os.path.join(os.path.dirname(__file__), debugFolder),
 debug = open(os.path.join(os.path.join(os.path.dirname(__file__), debugFolder), 'debug.txt'), "w")
 
 # Renvoie un object JSON en tant que dictionnaire
-datas = json.load(f)["result"]
+datas = json.load(result)["result"]
 
-for i in range(0, len(roles)):
-    fullPrint("======================================== " + roles[i] + " ========================================\n")        
+conf = json.load(config)
+notes_label = conf["notes_label"]
+postes = conf["roles"]
+
+
+for i in range(0, len(postes)):
+    role = postes[i]["nom"]
+    candidats = postes[i]["candidats"]
+
+    fullPrint("======================================== " + role + " ========================================\n")
 
     # Extraction des données
     resultats, nb_vote, nb_blanc = extractData(datas[i])
@@ -391,26 +383,30 @@ for i in range(0, len(roles)):
 
     # Calcul des médianes des candidats
     medianes = calculateMedianes(nb_vote, resultats)
-    fullPrint("Candidats : " + str(candidatss[i]) + "\n"
+    fullPrint("Candidats : " + str(candidats) + "\n"
               + "Médianes des candidats : " + str(medianes) + "\n")
 
     # Trie les candidats en fonction de leur médiane
-    sortResults(candidatss[i], resultats, medianes)
+    sortResults(candidats, resultats, medianes)
     fullPrint("Liste pré-triées : \n" + 
-        "   - Candidats : " + str(candidatss[i]) + "\n"
+        "   - Candidats : " + str(candidats) + "\n"
         "   - Médianes : " + str(medianes) + "\n"
         "   - Résultats : " + str(resultats) + "\n")
     
     # Trie les candidats à égalité    
-    sortEqualities(nb_vote, candidatss[i], resultats, medianes)
+    sortEqualities(nb_vote, candidats, resultats, medianes)
     fullPrint("Liste triées : \n" + 
-        "   - Candidats : " + str(candidatss[i]) + "\n"
+        "   - Candidats : " + str(candidats) + "\n"
         "   - Médianes : " + str(medianes) + "\n"
         "   - Résultats : " + str(resultats) + "\n")
     
     # Affiche le graph
-    showGraph(roles[i], candidatss[i], resultats, medianes, nb_blanc, nb_vote)
+    showGraph(role, candidats, resultats, medianes, nb_blanc, nb_vote)
 
-f.close()
+
+
+result.close()
+config.close()
+
 resume.close()
 debug.close()

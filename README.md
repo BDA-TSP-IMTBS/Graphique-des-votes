@@ -26,28 +26,28 @@ Vous pouvez trouvez un exemple avec le fichier [result.json](./result.json)
 
 ## Utiliser l'application
 
-A la fin de la page de dépouillage des votes de Bélénios, vous trouvez un bouton `raw results` qui permet de télécharger le fichier des résultats ([result.json](./result.json)) et il vous faudra le mettre dans le même dossier que le programme.
+A la fin de la page de dépouillage des votes de Bélénios, vous trouvez un bouton `raw results` qui permet de télécharger le fichier des résultats ([result.json](./result.json)) et il vous faudra le mettre dans le dossier racine à côté du programme.
 
-Vous pouvez paramètrer la liste des rôles pour 
-```python
-roles = ["Présidence", "Vice-Présidence", "Trésorerie", "Vice-Tésorerie", "Secrétariat"]
+Pour paramètrer la liste des rôles et des candidats, cela se passe dans le fichier [config.json](./config.json)
+``` json
+{
+    "notes_label": ["Extrêmement Favorable", "Très Favorable", "Favorable", "Neutre", "Défavorable", "Très Défavorable", "Extrêmement Défavorable"],
+    "roles": [
+        { "nom": "Présidence", "candidats": ["Answer1", "Answer2", "Answer3"] },
+        { "nom": "Vice-Présidence", "candidats": ["Answer1", "Answer2", "Answer3"] },
+        { "nom": "Trésorerie", "candidats": ["Answer1", "Answer2", "Answer3", "Answer4"] },
+        { "nom": "Vice-Trésorerie", "candidats": ["Answer1", "Answer2", "Answer3", "Answer4", "Answer5"] },
+        { "nom": "Secrétariat", "candidats": ["Answer1", "Answer2"] }
+    ]
+}
 ```
-
-<br />
-
-De même, les candidats à l'élection sont définis au début du fichier, dans l'ordre des postes :
-```python
-candidatss = [
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3"],
-    ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-    ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"],
-    ["Answer 1", "Answer 2"]
-]
+- `notes_label` : Liste des labels des notes mises, de la meilleure à la pire;
+- `roles` : Liste des postes concernés par l'élection. <b> /!\ L'ordre des postes doit être le même que celui des questions sur Bélénios /!\ </b>
+``` json
+{ "nom": "Présidence", "candidats": ["Answer1", "Answer2", "Answer3"] },
 ```
-### <u> /!\ ATTENTION /!\ </u>
-Les postes doivent être dans le même ordre que les questions posées sur Bélénios et le nom des candidats doit être le même que dans les questions sur Bélénios.
-### <u> /!\ ATTENTION /!\ </u>
+- `nom` : Intitulé du poste;
+- `candidats` : Liste des candidats à ce poste. <b> /!\ L'ordre des candidats doit être le même que celui des propositions sur Bélénios /!\ </b>
 
 ### Les résultats
 

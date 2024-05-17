@@ -4,11 +4,11 @@ Résultats : [[2, 2, 3], [3, 1, 2], [2, 2, 0], [0, 4, 4], [3, 3, 1], [2, 1, 3], 
 Nombre de votes valides : 15; 
 Nombre de votes blancs : 3
 
-Candidats : ['Answer 1', 'Answer 2', 'Answer 3']
+Candidats : ['Answer1', 'Answer2', 'Answer3']
 Médianes des candidats : [4, 3, 3]
 
 Liste pré-triées : 
-   - Candidats : ['Answer 2', 'Answer 3', 'Answer 1']
+   - Candidats : ['Answer2', 'Answer3', 'Answer1']
    - Médianes : [3, 3, 4]
    - Résultats : [[2, 3, 2], [1, 2, 3], [2, 0, 2], [4, 4, 0], [3, 1, 3], [1, 3, 2], [2, 2, 3]]
 
@@ -18,7 +18,7 @@ sub-order avant tri : [1, 2, 0]
 sub-order après tri : [1, 2, 0]
 
 Liste triées : 
-   - Candidats : ['Answer 2', 'Answer 3', 'Answer 1']
+   - Candidats : ['Answer2', 'Answer3', 'Answer1']
    - Médianes : [3, 3, 4]
    - Résultats : [[2, 3, 2], [1, 2, 3], [2, 0, 2], [4, 4, 0], [3, 1, 3], [1, 3, 2], [2, 2, 3]]
 
@@ -28,11 +28,11 @@ Résultats : [[3, 3, 1], [2, 1, 2], [3, 2, 0], [1, 0, 3], [0, 3, 2], [2, 2, 2], 
 Nombre de votes valides : 15; 
 Nombre de votes blancs : 1
 
-Candidats : ['Answer 1', 'Answer 2', 'Answer 3']
+Candidats : ['Answer1', 'Answer2', 'Answer3']
 Médianes des candidats : [2, 4, 4]
 
 Liste pré-triées : 
-   - Candidats : ['Answer 1', 'Answer 2', 'Answer 3']
+   - Candidats : ['Answer1', 'Answer2', 'Answer3']
    - Médianes : [2, 4, 4]
    - Résultats : [[3, 3, 1], [2, 1, 2], [3, 2, 0], [1, 0, 3], [0, 3, 2], [2, 2, 2], [4, 4, 5]]
 
@@ -42,7 +42,7 @@ sub-order avant tri : [0, 1, 2]
 sub-order après tri : [0, 1, 2]
 
 Liste triées : 
-   - Candidats : ['Answer 1', 'Answer 2', 'Answer 3']
+   - Candidats : ['Answer1', 'Answer2', 'Answer3']
    - Médianes : [2, 4, 4]
    - Résultats : [[3, 3, 1], [2, 1, 2], [3, 2, 0], [1, 0, 3], [0, 3, 2], [2, 2, 2], [4, 4, 5]]
 
@@ -52,11 +52,11 @@ Résultats : [[2, 1, 1, 4], [5, 2, 1, 1], [1, 0, 3, 0], [2, 2, 2, 3], [1, 3, 4, 
 Nombre de votes valides : 15; 
 Nombre de votes blancs : 0
 
-Candidats : ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+Candidats : ['Answer1', 'Answer2', 'Answer3', 'Answer4']
 Médianes des candidats : [2, 4, 4, 3]
 
 Liste pré-triées : 
-   - Candidats : ['Answer 1', 'Answer 4', 'Answer 2', 'Answer 3']
+   - Candidats : ['Answer1', 'Answer4', 'Answer2', 'Answer3']
    - Médianes : [2, 3, 4, 4]
    - Résultats : [[2, 4, 1, 1], [5, 1, 2, 1], [1, 0, 0, 3], [2, 3, 2, 2], [1, 4, 3, 4], [4, 2, 2, 1], [0, 1, 5, 3]]
 
@@ -66,7 +66,7 @@ sub-order avant tri : [0, 0, 2, 1]
 sub-order après tri : [0, 0, 1, 2]
 
 Liste triées : 
-   - Candidats : ['Answer 1', 'Answer 4', 'Answer 3', 'Answer 2']
+   - Candidats : ['Answer1', 'Answer4', 'Answer3', 'Answer2']
    - Médianes : [2, 3, 4, 4]
    - Résultats : [[2, 4, 1, 1], [5, 1, 1, 2], [1, 0, 3, 0], [2, 3, 2, 2], [1, 4, 4, 3], [4, 2, 1, 2], [0, 1, 3, 5]]
 
@@ -76,11 +76,11 @@ Résultats : [[1, 3, 5, 1, 3], [1, 1, 3, 3, 2], [3, 3, 1, 2, 0], [3, 3, 1, 1, 4]
 Nombre de votes valides : 15; 
 Nombre de votes blancs : 0
 
-Candidats : ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4', 'Answer 5']
+Candidats : ['Answer1', 'Answer2', 'Answer3', 'Answer4', 'Answer5']
 Médianes des candidats : [3, 3, 1, 4, 3]
 
 Liste pré-triées : 
-   - Candidats : ['Answer 3', 'Answer 1', 'Answer 2', 'Answer 5', 'Answer 4']
+   - Candidats : ['Answer3', 'Answer1', 'Answer2', 'Answer5', 'Answer4']
    - Médianes : [1, 3, 3, 3, 4]
    - Résultats : [[5, 1, 3, 3, 1], [3, 1, 1, 2, 3], [1, 3, 3, 0, 2], [1, 3, 3, 4, 1], [0, 3, 0, 1, 1], [4, 3, 4, 4, 3], [1, 1, 1, 1, 4]]
 
@@ -90,7 +90,7 @@ sub-order avant tri : [0, 3, 1, 2, 0]
 sub-order après tri : [0, 1, 2, 3, 0]
 
 Liste triées : 
-   - Candidats : ['Answer 3', 'Answer 2', 'Answer 5', 'Answer 1', 'Answer 4']
+   - Candidats : ['Answer3', 'Answer2', 'Answer5', 'Answer1', 'Answer4']
    - Médianes : [1, 3, 3, 3, 4]
    - Résultats : [[5, 3, 3, 1, 1], [3, 1, 2, 1, 3], [1, 3, 0, 3, 2], [1, 3, 4, 3, 1], [0, 0, 1, 3, 1], [4, 4, 4, 3, 3], [1, 1, 1, 1, 4]]
 
@@ -100,17 +100,17 @@ Résultats : [[1, 3], [3, 1], [2, 4], [4, 2], [3, 3], [1, 2], [1, 0]]
 Nombre de votes valides : 15; 
 Nombre de votes blancs : 6
 
-Candidats : ['Answer 1', 'Answer 2']
+Candidats : ['Answer1', 'Answer2']
 Médianes des candidats : [3, 2]
 
 Liste pré-triées : 
-   - Candidats : ['Answer 2', 'Answer 1']
+   - Candidats : ['Answer2', 'Answer1']
    - Médianes : [2, 3]
    - Résultats : [[3, 1], [1, 3], [4, 2], [2, 4], [3, 3], [2, 1], [0, 1]]
 
 ===== Egalité =====
 Liste triées : 
-   - Candidats : ['Answer 2', 'Answer 1']
+   - Candidats : ['Answer2', 'Answer1']
    - Médianes : [2, 3]
    - Résultats : [[3, 1], [1, 3], [4, 2], [2, 4], [3, 3], [2, 1], [0, 1]]
 

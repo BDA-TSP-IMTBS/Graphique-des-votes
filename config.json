@@ -1,0 +1,14 @@
+{
+    "notes_label": ["Extrêmement Favorable", "Très Favorable", "Favorable", "Neutre", "Défavorable", "Très Défavorable", "Extrêmement Défavorable"],
+    "roles": [
+        { "nom": "Présidence", "candidats": ["Answer1", "Answer2", "Answer3"] },
+
+        { "nom": "Vice-Présidence", "candidats": ["Answer1", "Answer2", "Answer3"] },
+
+        { "nom": "Trésorerie", "candidats": ["Answer1", "Answer2", "Answer3", "Answer4"] },
+
+        { "nom": "Vice-Trésorerie", "candidats": ["Answer1", "Answer2", "Answer3", "Answer4", "Answer5"] },
+
+        { "nom": "Secrétariat", "candidats": ["Answer1", "Answer2"] }
+    ]
+}
