@@ -7,18 +7,18 @@ from copy import deepcopy
 
 ## ======================================== Functions ========================================
 ## Process data
-def extractData(data: list[list[int]]) -> list[list[int]]:
+def extractData(nb_notes: int, data: list[list[int]]) -> list[list[int]]:
     ''' Cette fonction sert à extraire les données obtenues en json depuis Bélénios
     
-    Input :     data -> Résultats de la question dont on veut extraire les données.
+    Input :     nb_notes -> Nombre de notes possible d'être mises
+                data -> Résultats de la question dont on veut extraire les données.
 
     Output :    resultats -> Liste du dépouillage de l'élection;
                 nb_vote (int) -> Nombre de votes valides;
                 nb_blanc (int) -> Nombre de votes blancs.'''
-    global notes_label
-
+    
     # Initialisation des résultats
-    resultats = [[0 for candidat in data[0]] for note in notes_label]
+    resultats = [[0 for candidat in data[0]] for note in range(nb_notes)]
     nb_vote = 0
     nb_blanc = 0
 
@@ -261,16 +261,16 @@ def fullPrint(texte: str):
     debug.write(texte + "\n")
 
 ## Show graph
-def showGraph(role: str, candidats: list[str], resultats: list[list[int]], medianes: list[int], nb_blanc: int, nb_vote: int):
+def showGraph(notes_label: list[str], role: str, candidats: list[str], resultats: list[list[int]], medianes: list[int], nb_blanc: int, nb_vote: int):
     ''' Cette fonction permet de créer le graphique des résultats
     
-    Input : role -> Poste qui correspond aux résultats;
+    Input : notes_label -> Liste des labels des notes
+            role -> Poste qui correspond aux résultats;
             candidats -> Liste des canditats au poste;
             resultats -> Liste du dépouillage de l'élection;
             medianes -> Médianes de chaque candidat;
             nb_blanc -> Nombre de votes blanc;
-            nb_vote -> Nombre de votes valides.'''  
-    global notes_label
+            nb_vote -> Nombre de votes valides.'''
 
     largeur_barre = 0.1 # Largeur de chaque barre : attention si valeur trop grande, il n'y aura pas de différence entre chaque paquet de barres
 
@@ -333,7 +333,7 @@ def showGraph(role: str, candidats: list[str], resultats: list[list[int]], media
     #plt.subplots_adjust(bottom=0.25) # Ajuste la taille du graphique pour ne pas se supperposer à la légende
 
     # Ajoute les informations des votes blancs/valides
-    plt.text(0, maxResult + 0.5, "Votes : " + str(nb_vote) + "\n" + "Votes blancs : " + str(nb_blanc), fontsize=10, ha='left', va='top', fontweight = 'bold')
+    plt.text(len(x1)/2, maxResult + 0.5, "Votes : " + str(nb_vote) + "\n" + "Votes blancs : " + str(nb_blanc), fontsize=10, ha='left', va='top', fontweight = 'bold')
 
     graphForlder = 'graphs'
     if not os.path.exists(os.path.join(os.path.dirname(__file__), graphForlder)):
@@ -374,7 +374,7 @@ for i in range(0, len(postes)):
     fullPrint("======================================== " + role + " ========================================\n")
 
     # Extraction des données
-    resultats, nb_vote, nb_blanc = extractData(datas[i])
+    resultats, nb_vote, nb_blanc = extractData(len(notes_label), datas[i])
     fullPrint("Résultats : " + str(resultats) + "\n"
         + "Nombre de votes valides : " + str(nb_vote) + "; \n"
         + "Nombre de votes blancs : " + str(nb_blanc) + "\n")
@@ -401,7 +401,7 @@ for i in range(0, len(postes)):
         "   - Résultats : " + str(resultats) + "\n")
     
     # Affiche le graph
-    showGraph(role, candidats, resultats, medianes, nb_blanc, nb_vote)
+    showGraph(notes_label, role, candidats, resultats, medianes, nb_blanc, nb_vote)
 
 
 
